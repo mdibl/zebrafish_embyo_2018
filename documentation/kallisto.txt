@@ -1,0 +1,32 @@
+# tutorial for Kallisto
+# created by Alejandro Schmieder
+
+# this is a tutorial for performing Kallisto, which is a pseudoalignment tool
+# the commands for performing the various (and required) Kallisto commands are as follows:
+
+# Kallisto index:
+
+$ kallisto index -i transcripts.idx transcripts.fasta.gz
+
+# kallisto index builds a kallisto/transcriptome index; this output is specified/named by the "transcripts.idx" file.
+# the "transcripts.fasta.gz" file is the cDNA file, which is found @ /data/scratch/ensembl-92/danio_rerio/cDNA/
+
+# Kallist quant:
+# kallisto quant runs the quantification algorithm and generates the abundances for each of the individual transcripts
+
+$ kallisto quant -i transcripts.idx -o output -b 100 readsR1.fastq readsR2.fastq 
+# this kallisto command is for paired-end; the "-i transcripts.idx" calls the transcriptome index previously constructed; the "-o output" specifies the output directory; not sure what "-b 100" is
+# "readsR1.fastq readsR2.fastq" are the two paired datasets
+$ kallisto quant -i transcripts.idx -o output -b 100 --single -l 190 -s 20 reads.fastq
+# this kallisto command is for single-end data, which is specified by the "--single".
+# With single-end data, the length & standard deviation of the fragments most be specified: "-l 190" is the length, where 190 is the average length of Illumina fragments, while "-s 20" is the standard deviation, where 20 is the average standard deviation.
+# obviously, you're only using 1 input file because it's single-end, so there's one data
+
+# Kallisto pseudo:
+# kallisto pseudo runs the pseudoalignment tool
+
+$ kallisto pseudo -i transcripts.idx -o output <FASTQ files>
+# the above is for paired-end data; this basically has the same information as kallisto quant and kallisto index
+$ kallisto pseudo -i transcripts.idx -o output --single -l 190 -s 20 <FASTQ files>
+# the above is for single-end data, which, again, basically has the same information as the kallisto quant and kallisto index commands/steps
+

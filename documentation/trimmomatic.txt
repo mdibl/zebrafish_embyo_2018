@@ -1,0 +1,26 @@
+# This is a tutorial for performing Trimmomatic.
+# Created by Alejandro Schmieder
+# The command for performing Trimmomatic on paired-end data with the IlluminaClip step and SlidingWindow options is as follows (all further details will be explained):
+
+$ java -jar trimmomatic-0.30-jar PE -threads _ -phred33 <input_1> <input_2> -baseout <baseOUT> 
+ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:20
+
+# The java -jar command will call Trimmomatic.
+# The 0.30 trimmomatic is the version of Trimmomatic (this might not be the correct version).
+# PE means paired-end -- for single-end, we can use SE (i.e., replace all instances of PE with SE).
+# Threads is the amount of memory you're utilizing for the generation of the output (more threads = faster processing), the underscore
+# following the threads is the number of threads you're utilizing.
+# we have yet to determine how many threads we can utilize, 7/13/18).
+# phred is the quality score; it's the minimum quality score accepted.
+# ILLUMINACLIP gets rid of adapters specific to the Illumina machine -- we'll probably use TruSeq3.
+# within IlluminaClip, 2 means it allows a maximum of 2 mismatches, 30 is a score of 30 for paired-end (which means about 50 bp), and 10 is a score of 10 for single-end (about 17 bp).
+# SLIDINGWINDOW: scans reads with a 4-base wide sliding window, cuts when the average quality per base drops below 20 (which is the default in Galaxy, so we'll follow this value).
+
+# FOR SINGLE-END:
+
+$ java -jar trimmomatic-0.30.jar SE -threads _ -phred33 <input> <output> ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 SLIDINGWINDOW:4:20
+
+# to access the adapters for trimmomatic, go into the trimmomatic directory (/opt/software/external/trimmomatic/trimmomatic/adapters/)
+
+
+# We will probably make a script for Trimmomatic so we don't have to go through the process of writing out the lengthy command.

@@ -1,0 +1,14 @@
+#FastQC tutorial - created by Alejandro Schmieder
+
+To upload:
+$ wget url
+To perform FastQC:
+$ fastqc filename.filetype
+You can perform FastQC on multiple files:
+$ fastqc filename.filetype otherfile.filetype
+To unzip a FastQC file:
+$ unzip *fastqc.zip
+The above command will unzip all zipped (.zip) FastQC files.
+To remove the original zip files (because the unzip command doesn't remove the original zip file):
+$ rm *fastqc.zip
+The above command will rm all zipped (.zip) FastQC files.

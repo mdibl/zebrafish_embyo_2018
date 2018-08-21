@@ -1,0 +1,13 @@
+# tutorial for htseq-count
+# created by Alejandro Schmieder
+
+# this tutorial is for htseq-count
+# the following command is performed to complete htseq-count:
+
+$ htseq-count -f bam -s no <bam_file> <gtf_file>
+
+# the "htseq-count" calls the command
+# -f is the filetype; we want the filetype to be BAM (the default is SAM, but the ouput of HISAT2 is BAM)
+# -s is whether the output should be stranded; we don't want the output to be stranded, so we type "no"
+# the input is a BAM file, hence <bam_file>
+# the gene annotations files is a GTF file, hence <gtf_file>

@@ -1,0 +1,18 @@
+# tutorial for performing HISAT2
+# created by Alejandro Schmieder
+
+# to perform HISAT2, the following command is done:
+
+hisat2 -x <hisat2-idx> {-1 <m1>	-2 <m2>} | -U <r>
+
+# HISAT2 calls the command
+# -x <hisat2-idx> is the index for the reference genome/gene annotations;
+# the gene annotations can be found in /data/external/ensembl/release-92/danio_rerio?Danio_rerio.GRCz11.92.gtf.gz
+# the problem with the current gene annotations	is that	the file is gunzipped and we don't have	permissions to gunzip it
+# the {-1 <m1> -2 <m2>}	is for paired-end, where m1 is the input for read 1 and	m2 is the input	for read 2
+# multiple paired-end datasets can be processed	simultaneously,	the files must be comma-separated, without a space, and	in-order, like so:
+$ 6R1,7R1 6R2,7R2
+# the -U <r> is	for single=end (the {} can be excluded for single-ended, same for paired-end excluding the additional -U pipe
+# the <r> is the input,	there can be multiple, again comma-separated and spaceless, like so:
+$ 6,7   
+

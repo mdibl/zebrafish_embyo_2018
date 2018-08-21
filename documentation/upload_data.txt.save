@@ -1,0 +1,49 @@
+# Upload data and login tutorial
+CREATED BY ALEJANDRO SCHMIEDER AND NATHAN YEUNG
+
+Before anything, config your GitHub username + email:
+$ git config --global username "Your name"
+$ git config --global user.email "Your email"
+The above steps are so you can login to your GitHub. The below step is to clone GitHub repositories.
+$ git clone url
+The "git clone" command will clone the GitHub repository (of interest). You don't need the above steps if you're
+working on one of the MDIBL servers.
+
+Begin with logging into server (we recommend using one of the dev servers):
+$ ssh username@servername.mdibl.org
+You'll be asked for your password--this needs to be 100% correct, obviously.
+$ ls
+Use the "ls" command to see what's inside your current directory.
+$ cd /data/internal/Biocore/
+The above step will place you inside the Biocore directory. You can "ls" to see that there are two directories,
+which includes the "zebrafish_dev" directory, where we're working.
+$ ls
+Now "cd" into the "zebrafish_dev" directory and within that, the "Actual_datasets" directory:
+$ cd zebrafish_dev/Actual_datasets/
+Now you'll see a list of directories. These directories are named after the study number.
+To make one of these directories, you can use "mkdir":
+$ mkdir study#
+The above command will, again, generate a directory with the specified name.
+Before you proceed and begin uploading your datasets into your new directory of interest, you'll need to change permissions.
+Type the command "chmod -R 774 'dirname'" so that anyone can work in the directory you made.
+$ chmod -R 774 dirname
+Now enter into that directory:
+$ cd dirname/
+Now, you have a few options for uploading your datasets into the directory.
+One easy way is to copy the link [OF THE SAMPLE] and use the command "wget", like so:
+$ wget url
+This will upload the RNA data to your current directory, but you won't be able to perform any other commands. 
+In other words, wget will completely occupy your current terminal.
+However, there's another option: "nohup".
+The "nohup" command allows you to perform the "wget" command without occupying the terminal.
+It'll generate a file that will be uploading your sample to your directory.
+"nohup" can be performed like so:
+$ nohup wget url &
+Your terminal will confirm that you want to generate a nohup file, so just press enter to proceed.
+After a while, your sample's data will be uploaded in your directory. It will be of the filetype fastq.gz.
+Thus, we need to convert from fastq.gz to fastq. This can be done with the "gunzip" command, like so:
+$ gunzip filename.fastq.gz
+This will occupy your terminal.
+You can also "gunzip" multiple files by using wildcards ("*"):
+$ gunzip *.fastq.gz
+The above command would perform "gunzip" on all of the fastq.gz files in your current directory.
